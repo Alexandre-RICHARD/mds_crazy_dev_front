@@ -9,6 +9,7 @@
   background: linear-gradient(45deg, rgba(27, 17, 50, 1) 0%, rgba(62, 53, 111, 1) 34%, rgba(97, 90, 141, 1) 64%, rgba(152, 102, 163, 1) 100%);
 
   .main {
+    overflow: auto;
     min-height: calc(100svh - ($headerHeight + $footerHeight));
     height: calc(100svh - ($headerHeight + $footerHeight));
     max-height: calc(100svh - ($headerHeight + $footerHeight));
@@ -18,4 +19,10 @@
 .global_page {
   height: 100%;
   padding: 16px;
+}
+
+.flex_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

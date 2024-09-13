@@ -1,0 +1,35 @@
+@use "@styles/variables" as *;
+
+.select_items {
+    z-index: 10;
+    position: absolute;
+    background-color: $lightColor_Two;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    padding-block: 8px;
+    gap: 8px;
+
+    .select_item {
+      width: 100%;
+      padding: 4px 13px;
+
+      &:focus, &:hover {
+        background-color: $lightColor_Four;
+      }
+
+      &:focus {
+        background-color: $lightColor_Four;
+      }
+
+      &.selected_item {
+        background-color: $activeInput;
+
+        &:focus, &:hover {
+          background-color: $activeInput;
+        }
+      }
+    }
+  }

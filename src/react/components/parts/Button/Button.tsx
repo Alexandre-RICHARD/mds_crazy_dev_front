@@ -16,12 +16,14 @@ type Props = {
       onClick: () => void;
       isDisabled: boolean;
       link?: undefined;
+      buttonSubmit?: boolean;
     }
   | {
       type: "link";
       onClick?: undefined;
       isDisabled?: undefined;
       link: string;
+      buttonSubmit?: undefined;
     }
 );
 
@@ -32,6 +34,7 @@ export const Button = ({
   onClick,
   link,
   isDisabled,
+  buttonSubmit,
 }: Props): React.JSX.Element | null => {
   if (type === "button") {
     return (
@@ -39,7 +42,7 @@ export const Button = ({
         className={`${styles.button_custom_border} ${isDisabled ? styles.disable : ""} ${styles[stylesType]}`}
       >
         <button
-          type="button"
+          type={buttonSubmit ? "submit" : "button"}
           className={`${styles.button_custom} ${isDisabled ? styles.disable : ""} ${styles[stylesType]}`}
           onClick={isDisabled ? undefined : onClick}
         >

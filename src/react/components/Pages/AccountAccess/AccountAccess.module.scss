@@ -1,5 +1,69 @@
 @use "@styles/variables" as *;
 
 .account_access_container {
-  
+  .error_input_message {
+    color: $errorColor;
+    font-size: 14px;
+  }
+
+  .account_handle_container {
+    min-width: 420px;
+    max-height: 450px;
+    overflow: auto;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-radius: 8px;
+    background-color: $lightColor_One;
+
+    .input_container {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: stretch;
+      padding: 4px;
+      border-radius: 5px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid $darkColor_Two;
+    
+      .input_label {
+
+      }
+
+      .input_input {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid $lightColor_Three;
+
+        .error_input {
+          border: 1px solid $errorColor;
+        }
+
+        &:active, &:focus {
+          border: 1px solid $activeInput;
+        }
+
+      }
+      &:hover {
+        background-color: $lightColor_Two;
+      }
+    }
+
+    .submit_button_container {
+      align-self: flex-end;
+    }
+  }
+
+  .bottom_account {
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+
+    .change_mode {
+      font-style: oblique;
+      color: $lightColor_One;
+    }
+  }
 }
+

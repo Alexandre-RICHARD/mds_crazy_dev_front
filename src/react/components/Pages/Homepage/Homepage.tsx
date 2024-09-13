@@ -4,9 +4,14 @@ import globalStyles from "../../../App.module.scss";
 import styles from "./Homepage.module.scss";
 
 export const Homepage = (): React.JSX.Element => {
+  const titleSentence =
+    "Avec Cosmo Match, faites graviter l'amour autour de vous";
+
   return (
-    <div className={`${globalStyles.global_page} ${styles.homepage_container}`}>
-      HomePage
+    <div
+      className={`${globalStyles.global_page} ${globalStyles.flex_center} ${styles.homepage_container}`}
+    >
+      <p className={styles.title_sentence}>{titleSentence}</p>
     </div>
   );
 };

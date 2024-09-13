@@ -22,7 +22,7 @@ export const Router = (): React.JSX.Element => {
         element={isUserConnected ? <HomepageConnected /> : <Homepage />}
       />
       <Route
-        path="/account"
+        path="/account/*"
         element={
           isUserConnected ? (
             <Navigate

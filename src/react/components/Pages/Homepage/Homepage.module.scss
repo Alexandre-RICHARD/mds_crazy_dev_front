@@ -1,5 +1,13 @@
+@use "@styles/variables" as *;
+
 .homepage_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  .title_sentence {
+    font-family: "RobofanFree", sans-serif;
+    font-size: 30px;
+    font-weight: 400;
+    color: $lightColor_One;
+    max-width: 550px;
+    letter-spacing: 3px;
+    text-align: center;
+  }
 }
