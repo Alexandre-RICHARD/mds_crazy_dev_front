@@ -11,30 +11,35 @@ import { Selector } from "../../parts/Selector/Selector";
 import styles from "./AccountAccess.module.scss";
 
 export const Register = (): React.JSX.Element => {
-  const [setIsUserConnected] = useCombinedStore(
-    useShallow((state) => [state.setIsUserConnected]),
+  const [setIsUserConnected, setUserData, number] = useCombinedStore(
+    useShallow((state) => [
+      state.setIsUserConnected,
+      state.setUserData,
+      state.number,
+    ]),
   );
 
   const [gender, setGender] = useState("");
   const [genderError, setGenderError] = useState("");
 
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Terre");
   const [userNameError, setUserNameError] = useState("");
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(`cosmomatch${number}@gmail.com`);
   const [emailError, setEmailError] = useState("");
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("bon anniversaire");
   const [passwordError, setPasswordError] = useState("");
 
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] =
+    useState("bon anniversaire");
   const [passwordConfirmationError, setPasswordConfirmationError] =
     useState("");
 
   // const [description, setDescription] = useState("");
   // const [descriptionError, setDescriptionError] = useState("");
 
-  const [age, setAge] = useState<number>();
+  const [age, setAge] = useState<number>(1435800);
   const [ageError, setAgeError] = useState("");
 
   // const [coordinateX, setCoordinateX] = useState("");
@@ -106,21 +111,28 @@ export const Register = (): React.JSX.Element => {
         },
       })
         .then((response) => {
-          console.log(response);
-          if (response.status === 201) {
+          if (response.ok) {
             setGender("");
             setUserName("");
             setEmail("");
             setPassword("");
             setPasswordConfirmation("");
             // setDescription("");
-            setAge(undefined);
+            setAge(0);
             // setCoordinateX("");
             // setCoordinateY("");
             // setCoordinateZ("");
 
-            redirect("/");
-            setIsUserConnected(true);
+            response
+              .json()
+              .then((data: { nickname: string }) => {
+                redirect("/");
+                setIsUserConnected(true);
+                setUserData({ name: data.nickname });
+              })
+              .catch((error) => {
+                console.error(error);
+              });
           }
         })
         .catch((error) => console.error(error));

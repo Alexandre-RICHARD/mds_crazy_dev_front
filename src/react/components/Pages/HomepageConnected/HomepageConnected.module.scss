@@ -1,5 +1,29 @@
 @use "@styles/variables" as *;
 
 .homepage_connected_container {
-  
+  color: $lightColor_One;
+
+  .welcome_title {
+    font-weight: 500;
+    font-size: 18px;
+  }
+
+  .homepage_container {
+    display: flex;
+    gap: 20px;
+
+    .daily_suggestions {
+      color: $darkColor_One;
+      padding: 12px;
+      border-radius: 5px;
+      justify-content: space-between;
+      background-color: $lightColor_Four;
+      
+      .profile_container {        
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    }
+  }
 }

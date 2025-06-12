@@ -1,0 +1,30 @@
+@use "@styles/variables" as *;
+
+.profile_part_container {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  border-radius: 2px;
+  background-color: $lightColor_One;
+
+  .top_container {
+    display: flex;
+    
+    .photo_container {
+      width: 150px;
+      height: 150px;
+      background-color: $activeInput;
+    }
+
+    .info_container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+
+  .consult_button_container {
+    align-self: flex-end;
+    padding: 6px;
+  }
+}

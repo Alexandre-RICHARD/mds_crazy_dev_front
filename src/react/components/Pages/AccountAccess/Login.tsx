@@ -3,18 +3,22 @@ import { useState } from "react";
 import { NavLink, redirect } from "react-router-dom";
 import { useShallow } from "zustand/react/shallow";
 
-// import { fetcherHelper } from "../../../../helpers/api/fetcher.helper";
+import { fetcherHelper } from "../../../../helpers/api/fetcher.helper";
 import { useCombinedStore } from "../../../../store/combined.store";
 import { Button } from "../../parts/Button/Button";
 import styles from "./AccountAccess.module.scss";
 
 export const Login = (): React.JSX.Element => {
-  const [setIsUserConnected] = useCombinedStore(
-    useShallow((state) => [state.setIsUserConnected]),
+  const [setIsUserConnected, setUserData, number] = useCombinedStore(
+    useShallow((state) => [
+      state.setIsUserConnected,
+      state.setUserData,
+      state.number,
+    ]),
   );
 
-  const [email, setEmail] = useState("alexandrichard99@gmail.com");
-  const [password, setPassword] = useState("azertyuiop");
+  const [email, setEmail] = useState(`cosmomatch${number}@gmail.com`);
+  const [password, setPassword] = useState("bon anniversaire");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
 
@@ -23,7 +27,7 @@ export const Login = (): React.JSX.Element => {
     return emailRegex.test(emailTesting);
   };
 
-  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     let valid = true;
     setEmailError("");
@@ -40,33 +44,31 @@ export const Login = (): React.JSX.Element => {
     }
 
     if (valid) {
-      const requestData = {
-        email,
-        password,
-      };
-
-      try {
-        const response = await fetch("http://localhost:9000/api/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
+      fetcherHelper({
+        path: "/login",
+        method: "POST",
+        body: {
+          email,
+          password,
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data: { nickname: string }) => {
+                redirect("/");
+                setIsUserConnected(true);
+                setUserData({ name: data.nickname });
+              })
+              .catch((error) => {
+                console.error(error);
+              });
+          }
+        })
+        .catch((error) => {
+          console.error(error);
         });
-
-        // Vérifie la réponse du serveur
-        if (response.ok) {
-          const responseData = response.json();
-          console.log(responseData);
-          redirect("/");
-          setIsUserConnected(true);
-        } else {
-          const errorText = await response.text();
-          console.log(errorText);
-        }
-      } catch (error) {
-        console.error(error);
-      }
     }
   };
 
